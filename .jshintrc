@@ -1,0 +1,6 @@
+  {
+    "globalstrict": false,
+    "globals": {
+      "window": false
+    }
+  }

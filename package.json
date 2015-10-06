@@ -1,0 +1,31 @@
+{
+  "name": "ReactRoutes",
+  "version": "0.0.1",
+  "description": "Pruebas para desarrollo de frontend con Gulp, Browsify, Watchify, etc",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "BSD-2-Clause",
+  "devDependencies": {
+    "browserify": "^11.2.0",
+    "glob": "^5.0.15",
+    "gulp": "^3.9.0",
+    "gulp-concat": "~2.6.0",
+    "gulp-cssmin": "~0.1.7",
+    "gulp-if": "~2.0.0",
+    "gulp-streamify": "~1.0.2",
+    "gulp-notify": "~2.2.0",
+    "gulp-uglify": "~1.4.1",
+    "gulp-util": "~3.0.6",
+    "reactify": "~1.1.1",
+    "vinyl-source-stream": "~1.1.0",
+    "gulp-connect": "~2.2.0",
+    "gulp-livereload": "~3.8.1",
+    "watchify": "~3.4.0"
+  },
+  "dependencies": {
+    "react": "~0.13.3"
+  }
+}

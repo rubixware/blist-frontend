@@ -2,10 +2,6 @@
   "name": "ReactRoutes",
   "version": "0.0.1",
   "description": "Pruebas para desarrollo de frontend con Gulp, Browsify, Watchify, etc",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "author": "",
   "license": "BSD-2-Clause",
   "devDependencies": {

@@ -1,8 +1,8 @@
 {
-  "name": "ReactRoutes",
+  "name": "ReactProjectTemplate",
   "version": "0.0.1",
   "description": "Pruebas para desarrollo de frontend con Gulp, Browsify, Watchify, etc",
-  "author": "",
+  "author": "Rubixware",
   "license": "BSD-2-Clause",
   "devDependencies": {
     "browserify": "^11.2.0",
@@ -22,6 +22,7 @@
     "watchify": "~3.4.0"
   },
   "dependencies": {
-    "react": "~0.13.3"
+    "react": "~0.13.3",
+    "react-router": "v0.13.4"
   }
 }

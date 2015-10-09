@@ -5,7 +5,7 @@ var App = React.createClass({
 
   render: function() {
     return (
-      <div>Hola mundo</div>
+      <div>Cosas espantozas</div>
     );
   }
 

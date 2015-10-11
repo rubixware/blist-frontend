@@ -14,6 +14,10 @@ var App = require('./app.jsx');
 
 var domain = "http://rubixdev.cloudapp.net:8080";
 var urls = {
-  login: domain+"/sessions"
+  login: domain+"/sessions",
+  maps: {
+    companies: domain+"/companies",
+    companie: domain+"/companie"
+  }
 };
 React.render(<App urls={urls} />, document.querySelector("#app"));

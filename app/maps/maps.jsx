@@ -1,5 +1,6 @@
 var React = require('react');
 var GMaps = require('./initializer.js');
+var Server = require('../lib/server.js');
 var PropTypes = React.PropTypes;
 
 var Maps = React.createClass({
@@ -19,9 +20,9 @@ var Maps = React.createClass({
   },
   componentDidMount: function() {
     var mount = React.findDOMNode(this.refs.map);
-    this.setState({map: GMaps.init(mount)});
-    setInterval(this.updateData, (this.props.interval * 1000))
-    this.getInitialData();
+    window.map = GMaps.init(mount);
+    this.setState({map: window.map});
+    setTimeout(this.loadMarkers, 5000);
   },
   componentWillUnmount: function() {
     for (var i = 0; i < 9999; i++) {
@@ -49,14 +50,46 @@ var Maps = React.createClass({
   createLatLng: function(lat, lng){
     return new google.maps.LatLng(lat, lng);
   },
-  createMarker: function (location, type, name) {
-    var image = {rg: 'images/rg.png', casilla: 'images/casilla.png'}
-    var marker = new google.maps.Marker({
+  successMarkers: function (data, statusText, xhr) {
+      var markers = [];
+      for (companie of data.companies) {
+        var location = [companie.latitude, companie.longitude];
+        markers.push(this.createMarker(location, companie));
+      }
+      this.setState({ markers: markers });
+  },
+  failMarkers: function (data) {
+  },
+  loadMarkers: function () {
+    Server.get(this.props.urls.companies, this.successMarkers)
+    .fail(this.failMarkers);
+  },
+  contentString: function (companie) {
+    var tags = companie["tags"].join(" ");
+    var content = "<div class='info-poi'>"+
+    "<ul><li><image src='"+companie.image_url+"' class='logo-poi'/></li><li><a href='"+
+    companie.website+"'>"+companie.name+
+    "</a></li></ul><ul><li>"+companie.phone+
+    "</li><li><a href='"+companie.twitter+
+    "'>Twitter</a><a hfer='"+companie.facebook+
+    "'>Facebook</a></li></ul><ul><li>Tags: "+tags+"</li></ul></div>";
+    return content;
+  },
+  createMarker: function (location, companie) {
+    var image = ['images/frelancer.png', 'images/startup.png', 'images/pyme.png'];
+    var infowindow = new google.maps.InfoWindow({
+      content: this.contentString(companie)
+    });
+    var options = {
       position: this.createLatLng(location[0], location[1]),
-      map: this.state.map,
-      icon: image[type],
-      title: name,
+      map: window.map,
+      icon: image[companie.category_id - 1],
+      title: companie.name,
       zIndex: 1
+    };
+    var marker = new google.maps.Marker(options);
+    marker.addListener('click', function() {
+      infowindow.open(window.map, marker);
     });
     return marker;
   },

@@ -2,6 +2,7 @@ var React = require('react');
 var $ = require('jquery');
 window.jQuery = $;
 var toastr = require('toastr');
+var BSelect = require('./lib/bootstrap-select.js');
 var Bootstrap = require('bootstrap');
 var Server = require('./lib/server.js');
 var NavBar = require('./navbar.jsx');
@@ -10,6 +11,7 @@ var UserMenu = require('./user/user_menu.jsx');
 var LoginUser = require('./user/login_user.jsx');
 var GMaps = require('./maps/initializer.js');
 var Maps = require('./maps/maps.jsx');
+var Startup = require('./maps/startup.jsx');
 var App = require('./app.jsx');
 
 var domain = "http://rubixdev.cloudapp.net:8080";

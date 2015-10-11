@@ -14,6 +14,7 @@ var Maps = React.createClass({
   },
   getDefaultProps: function() {
     return {
+      companies: [],
       initial_data: function () {},
       update_data: function () {}
     };
@@ -22,27 +23,34 @@ var Maps = React.createClass({
     var mount = React.findDOMNode(this.refs.map);
     window.map = GMaps.init(mount);
     this.setState({map: window.map});
-    setTimeout(this.loadMarkers, 5000);
+    setTimeout(this.successMarkers, 5000);
   },
-  componentWillUnmount: function() {
-    for (var i = 0; i < 9999; i++) {
-      clearIntervals(i);
-    }
+  componentWillReceiveProps: function(nextProps) {
+    console.log(nextProps);
+    this.removeMarkers(this.state.markers);
+    this.updateData(nextProps.companies);
+    // setTimeout(this.updateData, 1500, nextProps.companies);
   },
   getInitialData: function(){
     this.props.initial_data(this);
   },
-  updateData: function(){
-    this.props.update_data(this);
+  updateData: function(companies){
+    var markers = [];
+    for (companie of companies) {
+      var location = [companie.latitude, companie.longitude];
+      markers.push(this.createMarker(location, companie));
+    }
+    this.setState({ markers: markers });
   },
   getCleanMarkers: function(){
     return this.removeMarkers(this.state.markers);
   },
   removeMarkers: function (markers) {
-    for (var i = 0; i < markers.length; i++) {
-      markers[i].setMap(null)
+    var size = markers.length;
+    for (var i = 0; i < size; i++) {
+      markers[i].setMap(null);
     }
-    return markers;
+    this.setState({ markers: [] });
   },
   removeMarker: function (marker) {
     return marker.setMap(null);
@@ -50,19 +58,13 @@ var Maps = React.createClass({
   createLatLng: function(lat, lng){
     return new google.maps.LatLng(lat, lng);
   },
-  successMarkers: function (data, statusText, xhr) {
+  successMarkers: function () {
       var markers = [];
-      for (companie of data.companies) {
+      for (companie of this.props.companies) {
         var location = [companie.latitude, companie.longitude];
         markers.push(this.createMarker(location, companie));
       }
       this.setState({ markers: markers });
-  },
-  failMarkers: function (data) {
-  },
-  loadMarkers: function () {
-    Server.get(this.props.urls.companies, this.successMarkers)
-    .fail(this.failMarkers);
   },
   contentString: function (companie) {
     var tags = companie["tags"].join(" ");
@@ -94,6 +96,7 @@ var Maps = React.createClass({
     return marker;
   },
   render: function() {
+
     return (<div id='map-canvas' ref='map' className='mapa'></div>);
   }
 

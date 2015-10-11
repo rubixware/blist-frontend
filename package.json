@@ -22,7 +22,8 @@
     "watchify": "~3.4.0"
   },
   "dependencies": {
-    "react": "~0.13.3",
-    "react-router": "v0.13.4"
+    "bootstrap": "^3.3.5",
+    "jquery": "^1.11.1",
+    "react": "~0.13.3"
   }
 }

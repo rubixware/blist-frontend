@@ -1,8 +1,7 @@
 var React = require('react');
-var Router = require('react-router');
+var $ = require('jquery');
+window.jQuery = $;
+var Bootstrap = require('bootstrap');
 var App = require('./app.jsx');
-var routes = require('./routes.jsx');
 
-Router.run(routes, Router.HashLocation, function (Handler) {
-  React.render(<Handler/>, document.body);
-});
+React.render(<App/>, document.body);

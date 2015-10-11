@@ -84,11 +84,12 @@ var cssTask = function (options) {
       console.log('Building CSS bundle');
       gulp.src(options.src)
         .pipe(concat('main.css'))
-        .piepe(gulp.dest(options.dest))
+        .pipe(gulp.dest(options.dest))
         .pipe(notify(function() {
           console.log('CSS budle built in ' + (Date.now() - start) + 'ms');
         }));
       };
+			run();
       gulp.watch(options.src, run);
     }else {
       gulp.src(options.src)

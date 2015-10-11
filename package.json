@@ -24,6 +24,7 @@
   "dependencies": {
     "bootstrap": "^3.3.5",
     "jquery": "^1.11.1",
-    "react": "~0.13.3"
+    "react": "~0.13.3",
+    "toastr": "^2.1.2"
   }
 }

@@ -5,7 +5,12 @@ var LoginUser = require('./user/login_user.jsx');
 var PropTypes = React.PropTypes;
 
 var NavBar = React.createClass({
-
+  getDefaultProps: function() {
+    return {
+      isUser: false,
+      loginModal: function () {console.log(":v!");}
+    };
+  },
   render: function() {
     return (
       <nav className="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -18,10 +23,9 @@ var NavBar = React.createClass({
               </button>
               <a className="navbar-brand" href="index.html">BList</a>
           </div>
-          <UserMenu/>
+          <SideNav/>
           <div className="collapse navbar-collapse navbar-ex1-collapse">
-            <SideNav/>
-            <LoginUser/>
+            <LoginUser isUser={this.props.isUser} loginModal={this.props.loginModal}/>
           </div>
       </nav>
 

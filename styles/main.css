@@ -1,3 +1,19 @@
 html {
   background-color: #111;
 }
+
+.mapa{
+  padding-top: 63rem;
+}
+
+.no-padding{
+  padding: 0px;
+}
+
+.map-content{
+  height: 65rem;
+}
+
+.fix-padding {
+  padding: 0px 10px;
+}

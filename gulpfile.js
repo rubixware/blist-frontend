@@ -10,6 +10,7 @@ var streamify = require('gulp-streamify');
 var livereload = require('gulp-livereload');
 var source = require('vinyl-source-stream');
 var browserify = require('browserify');
+var babelify = require('babelify');
 var watchify = require('watchify');
 var reactify = require('reactify');
 
@@ -22,7 +23,7 @@ var browserifyTask = function(options) {
 
   var appBundler = browserify({
     entries: [options.src],
-    transform: [reactify],
+    transform: [babelify],
     debug: options.development,
     cache: {},
     packageCache: {},

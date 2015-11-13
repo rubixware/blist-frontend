@@ -1,29 +1,49 @@
 {
-  "name": "ReactProjectTemplate",
+  "name": "Blist",
   "version": "0.0.1",
-  "description": "Pruebas para desarrollo de frontend con Gulp, Browsify, Watchify, etc",
-  "author": "Rubixware",
+  "description": "Lista de empresas locales",
+  "author": "Francisco lumbreras <nac13k@gmail.com>",
+  "contributors": [
+    {
+      "name": "Everardo Medina",
+      "email": "emedina@rubixware.com"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rubixware/blist-frontend"
+  },
+  "bugs": {
+    "url": "https://github.com/rubixware/blist-frontend/issues"
+  },
+  "keywords": [
+    "business",
+    "blist",
+    "companies"
+  ],
   "license": "BSD-2-Clause",
   "devDependencies": {
+    "babel-preset-react": "^6.1.18",
+    "babelify": "^7.2.0",
     "browserify": "^11.2.0",
     "glob": "^5.0.15",
     "gulp": "^3.9.0",
     "gulp-concat": "~2.6.0",
+    "gulp-connect": "~2.2.0",
     "gulp-cssmin": "~0.1.7",
     "gulp-if": "~2.0.0",
-    "gulp-streamify": "~1.0.2",
+    "gulp-livereload": "~3.8.1",
     "gulp-notify": "~2.2.0",
+    "gulp-streamify": "~1.0.2",
     "gulp-uglify": "~1.4.1",
     "gulp-util": "~3.0.6",
     "reactify": "~1.1.1",
     "vinyl-source-stream": "~1.1.0",
-    "gulp-connect": "~2.2.0",
-    "gulp-livereload": "~3.8.1",
     "watchify": "~3.4.0"
   },
   "dependencies": {
     "bootstrap": "^3.3.5",
-    "jquery": "^1.11.1",
-    "react": "~0.13.3"
+    "react": "^0.14.2",
+    "react-dom": "^0.14.2"
   }
 }

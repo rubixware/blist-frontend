@@ -3,7 +3,7 @@ build/main.js
 build/main.css
 build/vendors.js
 npm-debug.log
-
+.DS_Store
 # Logs
 logs
 *.log

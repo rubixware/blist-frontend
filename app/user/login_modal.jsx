@@ -1,4 +1,5 @@
 var React = require('react');
+var ReactDOM = require('react-dom');
 var $ = require('jquery');
 var PropTypes = React.PropTypes;
 
@@ -12,7 +13,7 @@ var LoginModal = React.createClass({
     this.init();
   },
   init: function() {
-    var modal = React.findDOMNode(this.refs.modal);
+    var modal = ReactDOM.findDOMNode(this.refs.modal);
     $(modal).modal('show');
     $(modal).on('hidden.bs.modal', this.props.unmount);
   },
@@ -24,8 +25,8 @@ var LoginModal = React.createClass({
     this.hide();
   },
   login: function () {
-    var user = React.findDOMNode(this.refs.user).value;
-    var password = React.findDOMNode(this.refs.password).value;
+    var user = ReactDOM.findDOMNode(this.refs.user).value;
+    var password = ReactDOM.findDOMNode(this.refs.password).value;
     this.props.login(user, password);
   },
   render: function() {

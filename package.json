@@ -21,8 +21,12 @@
     "blist",
     "companies"
   ],
+  "scripts": {
+    "start": "gulp"
+  },
   "license": "BSD-2-Clause",
   "devDependencies": {
+    "babel-preset-es2015": "^6.1.18",
     "babel-preset-react": "^6.1.18",
     "babelify": "^7.2.0",
     "browserify": "^11.2.0",
@@ -37,14 +41,15 @@
     "gulp-streamify": "~1.0.2",
     "gulp-uglify": "~1.4.1",
     "gulp-util": "~3.0.6",
-    "reactify": "~1.1.1",
     "vinyl-source-stream": "~1.1.0",
     "watchify": "~3.4.0"
   },
   "dependencies": {
     "bootstrap": "^3.3.5",
+    "jquery": "^2.1.4",
     "react": "^0.14.2",
     "react-dom": "^0.14.2",
-    "toastr": "^2.1.2"
+    "toastr": "^2.1.2",
+    "whatwg-fetch": "^0.10.1"
   }
 }

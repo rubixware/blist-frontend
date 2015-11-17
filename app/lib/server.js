@@ -1,6 +1,12 @@
 var $ = require('jquery');
 
 var Server = {
+  getDefaultHeaders: function(){
+    return {
+      "Accept": "application/json",
+      "Accept": "application/vnd.blistapi.v1"
+    };
+  },
   get: function(url, data, callback, type){
     if ( $.isFunction(data) ){
       type = type || callback,
@@ -10,10 +16,7 @@ var Server = {
 
     return $.ajax({
       url: url,
-      headers: {
-        "Accept": "application/json",
-        "Accept": "application/vnd.blistapi.v1"
-      },
+      headers: this.getDefaultHeaders,
       type: 'GET',
       success: callback,
       data: data,
@@ -29,10 +32,7 @@ var Server = {
 
     return $.ajax({
       url: url,
-      headers: {
-        "Accept": "application/json",
-        "Accept": "application/vnd.blistapi.v1"
-      },
+      headers: this.getDefaultHeaders,
       type: 'POST',
       success: callback,
       data: data,
@@ -48,10 +48,7 @@ var Server = {
 
     return $.ajax({
       url: url,
-      headers: {
-        "Accept": "application/json",
-        "Accept": "application/vnd.blistapi.v1"
-      },
+      headers: this.getDefaultHeaders,
       type: 'PUT',
       success: callback,
       data: data,
@@ -67,10 +64,7 @@ var Server = {
 
     return $.ajax({
       url: url,
-      headers: {
-        "Accept": "application/json",
-        "Accept": "application/vnd.blistapi.v1"
-      },
+      headers: this.getDefaultHeaders,
       type: 'PATCH',
       success: callback,
       data: data,
@@ -86,10 +80,7 @@ var Server = {
 
     return $.ajax({
       url: url,
-      headers: {
-        "Accept": "application/json",
-        "Accept": "application/vnd.blistapi.v1"
-      },
+      headers: this.getDefaultHeaders,
       type: 'DELETE',
       success: callback,
       data: data,

@@ -1,4 +1,5 @@
 var React = require('react');
+var ReactDOM = require('react-dom');
 var UserMenu = require('./user_menu.jsx');
 var PropTypes = React.PropTypes;
 var LoginUser = React.createClass({

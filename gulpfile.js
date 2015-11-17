@@ -12,7 +12,6 @@ var source = require('vinyl-source-stream');
 var browserify = require('browserify');
 var babelify = require('babelify');
 var watchify = require('watchify');
-var reactify = require('reactify');
 
 var dependencies = [
 	'react',
@@ -23,12 +22,13 @@ var browserifyTask = function(options) {
 
   var appBundler = browserify({
     entries: [options.src],
-    transform: [babelify],
+		extension: [options.extension],
     debug: options.development,
     cache: {},
     packageCache: {},
     fullPaths: options.development
-  });
+  })
+	.transform("babelify");
 
   (options.development ? dependencies : [])
   .forEach(function(dep) {
@@ -37,7 +37,7 @@ var browserifyTask = function(options) {
 
   var rebundle = function() {
     var start = Date.now();
-    console.log('Building APP bundle');
+    console.log('Compilando el APP');
     appBundler.bundle()
       .on('error', gutil.log)
       .pipe(source('main.js'))
@@ -45,7 +45,7 @@ var browserifyTask = function(options) {
       .pipe(gulp.dest(options.dest))
       .pipe(gulpif(options.development, livereload()))
       .pipe(notify(function() {
-        console.log('APP bundle build in ' + (Date.now() - start) + 'ms');
+        console.log('Se han compilado la APP ' + (Date.now() - start) + 'ms');
       }));
   };
 
@@ -59,7 +59,7 @@ var browserifyTask = function(options) {
     });
 
     var start = new Date();
-    console.log('Building VENDORS bundle');
+    console.log('Compilando las librerias de VENDOR');
 
     vendorsBundler.bundle()
       .on('error', gutil.log)
@@ -67,7 +67,7 @@ var browserifyTask = function(options) {
       .pipe(gulpif(!options.development, streamify(uglify())))
       .pipe(gulp.dest(options.dest))
       .pipe(notify(function() {
-        console.log('VENDORS bundle built in ' + (Date.now() - start) + 'ms');
+        console.log('VENDORS se ha compilado ' + (Date.now() - start) + 'ms');
       }));
   }
 
@@ -107,6 +107,7 @@ gulp.task('default', function () {
   browserifyTask({
     development: true,
     src: './app/main.js',
+		extension: 'jsx',
     dest: './build'
   });
 

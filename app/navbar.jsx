@@ -1,4 +1,5 @@
 var React = require('react');
+var ReactDOM = require('react-dom');
 var SideNav = require('./sidenav.jsx');
 var UserMenu = require('./user/user_menu.jsx');
 var LoginUser = require('./user/login_user.jsx');

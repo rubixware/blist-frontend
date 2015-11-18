@@ -3,14 +3,14 @@ var ReactDOM = require('react-dom');
 var $ = require('jquery');
 window.jQuery = $;
 var toastr = require('toastr');
-var Server = require('./lib/server.js');
 var SideNav = require('./sidenav.jsx');
 var UserMenu = require('./user/user_menu.jsx');
 var LoginUser = require('./user/login_user.jsx');
 var LoginModal = require('./user/login_modal.jsx');
 var PropTypes = React.PropTypes;
-import NavBar from './navbar.jsx';
-import GMap from './maps/gmap.jsx';
+import NavBar from './navbar.jsx'
+import GMap from './maps/gmap.jsx'
+import Fetcher from './lib/fetcher.js'
 
 var App = React.createClass({
   getInitialState: function() {
@@ -23,7 +23,7 @@ var App = React.createClass({
   componentDidMount: function() {
     this.updateStateUser(this.state.token);
   },
-  successLogin: function (data, statusText, xhr) {
+  successLogin: function (data) {
     toastr.success("Bienvenido!");
     this.unmountModal();
     this.setState({
@@ -37,18 +37,18 @@ var App = React.createClass({
       isUser: isUser
     });
   },
-  failLogin: function (data, xhr, statusText) {
+  failLogin: function (data) {
     toastr.error(data.responseJSON.errors[0].message);
     toastr.error(data.responseJSON.errors[0].code);
   },
   login: function (user, password) {
     var params = { "session": { "email": user, "password": password } };
     var urlLogin = this.props.urls.login;
-    Server.post(
-        urlLogin,
-        params,
-        this.successLogin)
-      .fail(this.failLogin);
+    Fetcher.post(urlLogin,
+      params,
+      (data) => {this.successLogin(data)},
+      (error) => {this.failLogin(error)}
+    )
   },
   loginModal: function () {
     var modal = { login: this.login,

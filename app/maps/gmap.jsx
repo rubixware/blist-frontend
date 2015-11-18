@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import GMaps from './gmaps.js';
-import Server from '../lib/server.js';
+import Fetcher from '../lib/fetcher.js';
 
 export default class GMap extends React.Component {
 
@@ -45,7 +45,7 @@ export default class GMap extends React.Component {
     return new google.maps.LatLng(location[0],location[1]);
   }
 
-  successMarkers(data, status, xhr){
+  successMarkers(data){
     let markers = [];
     markers = data.companies.map( (company) => {
       let location = [company.latitude, company.longitude];
@@ -56,14 +56,15 @@ export default class GMap extends React.Component {
     });
   }
 
-  failMarkers(data, status, xhr){
+  failMarkers(error){
     console.log("Failed markers");
   }
 
   loadMarkers(){
-    Server.get(this.props.sourceUrl,
-       (data, status, xhr) => {this.successMarkers(data, status, xhr);})
-    .fail(self.failMarkers);
+    Fetcher.get(this.props.sourceUrl,
+      (data) => {this.successMarkers(data)},
+      (error) => {this.failMarkers(error)}
+    )
   }
 
   contentString(company){
